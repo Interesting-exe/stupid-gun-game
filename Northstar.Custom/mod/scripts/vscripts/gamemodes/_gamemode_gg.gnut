@@ -162,7 +162,7 @@ void function OnPlayerRespawned_Threaded( entity player )
 }
 
 void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
-{
+{		
 	if ( !victim.IsPlayer() || !attacker.IsPlayer() || GetGameState() != eGameState.Playing )
 		return
 
@@ -198,8 +198,12 @@ void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
 				percentageReward = GetCurrentPlaylistVarFloat( "gg_execution_reward", 1.0 )
 				scoreEvent = "Execution"
 			}
-
+			
+			
 			Reward( attacker, victim, scoreEvent, percentageReward )
+			
+			if( GameRules_GetTeamScore( attacker.GetTeam() ) == GetGunGameWeapons().len() )
+				playerHSNames.append( attacker.GetPlayerName() )
 		}
 	}
 
@@ -274,6 +278,11 @@ void function UpdateLoadout( entity player )
 
 	foreach ( entity weapon in player.GetOffhandWeapons() )
 		player.TakeWeaponNow( weapon.GetWeaponClassName() )
+		
+	if( playerHSNames.find( player.GetPlayerName() ) == -1 )
+		player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE )
+	else
+		player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE )
 
 	if ( weapon.offhandSlot != -1)
 	{
@@ -282,34 +291,12 @@ void function UpdateLoadout( entity player )
 
 		if( weapon.weapon == "mp_weapon_grenade_sonar" )
 		{
-		player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [ "allow_as_primary" ] )
-
-		player.SetActiveWeaponByName( "melee_pilot_emptyhanded" ) // Let the player use the melee in the primary slot, and then force equip it. Effectively gives them an empty hand.
-		}
-		else
-		{
-			if( playerHSNames.find( player.GetPlayerName() ) == -1 )
-			{
-				player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE, [ "allow_as_primary" ])
-
-				player.SetActiveWeaponByName( "melee_pilot_kunai" )
-			}
-			else
-			{
-				player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [ "allow_as_primary" ])
-
-				player.SetActiveWeaponByName( "melee_pilot_emptyhanded" )
-			}
+			player.SetActiveWeaponByName( GetOffhandWeapon( OFFHAND_MELEE ) ) // Let the player use the melee in the primary slot, and then force equip it. Effectively gives them an empty hand.
 		}
 	}
 	else
 	{
 		player.GiveWeapon( weapon.weapon, weapon.mods )
-
-		if( playerHSNames.find( player.GetPlayerName() ) == -1 )
-			player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE )
-		else
-			player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE )
 	}
 
     // Grapple
