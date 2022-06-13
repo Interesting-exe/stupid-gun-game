@@ -202,6 +202,7 @@ void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
 			
 			Reward( attacker, victim, scoreEvent, percentageReward )
 			
+			// adds the attacker to the hs array if they've reached the final weapon
 			if( GameRules_GetTeamScore( attacker.GetTeam() ) == GetGunGameWeapons().len() )
 				playerHSNames.append( attacker.GetPlayerName() )
 		}
