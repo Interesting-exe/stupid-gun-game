@@ -292,7 +292,7 @@ void function UpdateLoadout( entity player )
 
 		if( weapon.weapon == "mp_weapon_grenade_sonar" )
 		{
-			player.SetActiveWeaponByName( GetOffhandWeapon( OFFHAND_MELEE ) ) // Let the player use the melee in the primary slot, and then force equip it. Effectively gives them an empty hand.
+			player.SetActiveWeaponByName( player.GetOffhandWeapon( OFFHAND_MELEE ) ) // Let the player use the melee in the primary slot, and then force equip it. Effectively gives them an empty hand.
 		}
 	}
 	else
