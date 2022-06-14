@@ -279,16 +279,15 @@ void function UpdateLoadout( entity player )
 
 	foreach ( entity weapon in player.GetOffhandWeapons() )
 		player.TakeWeaponNow( weapon.GetWeaponClassName() )
-		
-	if( playerHSNames.find( player.GetPlayerName() ) == -1 )
-		player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE )
-	else
-		player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE )
 
 	if ( weapon.offhandSlot != -1)
 	{
-
 		player.GiveOffhandWeapon( weapon.weapon, weapon.offhandSlot, weapon.mods )
+
+		if( playerHSNames.find( player.GetPlayerName() ) == -1 )
+			player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE, [ "allow_as_primary" ] )
+		else
+			player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [ "allow_as_primary" ] )
 
 		if( weapon.weapon == "mp_weapon_grenade_sonar" )
 		{
@@ -298,6 +297,11 @@ void function UpdateLoadout( entity player )
 	else
 	{
 		player.GiveWeapon( weapon.weapon, weapon.mods )
+
+		if( playerHSNames.find( player.GetPlayerName() ) == -1 )
+			player.GiveOffhandWeapon( "melee_pilot_kunai", OFFHAND_MELEE )
+		else
+			player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE )
 	}
 
     // Grapple
