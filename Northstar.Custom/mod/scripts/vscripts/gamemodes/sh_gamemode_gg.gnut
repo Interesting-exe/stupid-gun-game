@@ -61,7 +61,8 @@ void function CreateGamemodeGG()
 
 
         // titan mains
-        GunGameWeapon ggSword        = { weapon = "melee_titan_sword",         offhandSlot = 0, ... }
+        GunGameWeapon ggSword        = { weapon = "melee_titan_sword",         offhandSlot = 2, ... }
+        GunGameWeapon ggMeleeport    = { weapon = "melee_pilot_arena",         offhandSlot = 0, ... }
         GunGameWeapon ggLeadwall     = { weapon = "mp_titanweapon_leadwall", ... }
         GunGameWeapon ggPlasma       = { weapon = "mp_titanweapon_sniper", ... }
         GunGameWeapon ggParticle     = { weapon = "mp_titanweapon_particle_accelerator", ... }
@@ -69,11 +70,8 @@ void function CreateGamemodeGG()
         GunGameWeapon gg40mm         = { weapon = "mp_titanweapon_sticky_40mm", ... }
         GunGameWeapon ggPredator     = { weapon = "mp_titanweapon_predator_cannon", ... }
         GunGameWeapon ggXo16         = { weapon = "mp_titanweapon_xo16_vanguard", ... }
-        
-        //titan abilities
-        GunGameWeapon ggWeebWave     = { weapon = "mp_titanweapon_arc_wave",  mods = ["pas_ronin_arcwave", "burn_mod_titan_arc_wave", "dev_mod_low_recharge"],         offhandSlot = 0, ... }                        
-        GunGameWeapon ggShield       = { weapon = "mp_titanweapon_heat_shield",         offhandSlot = 0, ... }
-                
+        GunGameWeapon ggTrippleThread = { weapon = "mp_titanweapon_triplethreat", ... }
+
         // smg
 	    GunGameWeapon ggCar          = { weapon = "mp_weapon_car",             mods = ["extended_ammo", "pas_fast_reload", "holosight"], ... }
 	    GunGameWeapon ggAlternator   = { weapon = "mp_weapon_alternator_smg",  mods = ["extended_ammo", "pas_fast_reload"], ... }
@@ -103,7 +101,7 @@ void function CreateGamemodeGG()
 	    GunGameWeapon ggColdwar      = { weapon = "mp_weapon_pulse_lmg",       mods = ["extended_ammo", "pas_fast_reload"], ... }
 
         // main pistol
-	    GunGameWeapon ggMozambique   = { weapon = "mp_weapon_shotgun_pistol",  mods = ["extended_ammo", "pas_fast_reload"], ... }
+	    GunGameWeapon ggMozambique   = { weapon = "mp_weapon_shotgun_pistol",  mods = ["extended_ammo", "pas_fast_reload", "silencer"], ...}
 	    GunGameWeapon ggWingmanElite = { weapon = "mp_weapon_wingman_n",       mods = ["extended_ammo", "pas_fast_reload"], ... }
 
         // sniper
@@ -112,8 +110,8 @@ void function CreateGamemodeGG()
 	    GunGameWeapon ggLongbow      = { weapon = "mp_weapon_dmr",             mods = ["extended_ammo", "pas_fast_ads"], ... }
 
         // side pistol
-	    GunGameWeapon ggRe45         = { weapon = "mp_weapon_autopistol",      mods = ["extended_ammo", "pas_fast_reload", "temp_sight"], ... }
-	    GunGameWeapon ggP2016        = { weapon = "mp_weapon_semipistol",      mods = ["extended_ammo", "pas_fast_reload"], ... }
+	    GunGameWeapon ggRe45         = { weapon = "mp_weapon_autopistol",      mods = ["extended_ammo", "pas_fast_reload", "temp_sight", "silencer"], ... }
+	    GunGameWeapon ggP2016        = { weapon = "mp_weapon_semipistol",      mods = ["extended_ammo", "pas_fast_reload", "silencer"], ... }
 	    GunGameWeapon ggWingman      = { weapon = "mp_weapon_wingman",         mods = ["extended_ammo", "pas_fast_reload"], ... }
 
         // final
@@ -168,17 +166,15 @@ void function CreateGamemodeGG()
 	    file.weapons.append(ggRe45)
 	    file.weapons.append(ggP2016)
 	    file.weapons.append(ggWingman)
-         
-       file.weapons.append(ggWeebWave)                  
+            file.weapons.append(ggTrippleThread)
 
         // Random order til now
         file.weapons.randomize()
         
-        
 	    file.weapons.append(ggChargerifle)
-      file.weapons.append(ggSword)
-      file.weapons.append(ggShield)
+        file.weapons.append(ggSword)
 	    file.weapons.append(ggPulse)
+           // file.weapons.append(ggMeleeport)
 	}
 
 
